@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
+import ItemComponent from "./components/ItemComponent";
 
 interface Item {
   id: number,
@@ -15,7 +16,7 @@ interface Item {
   publishAsDisplay: string | null,
   sticky: boolean,
   sensitive: boolean,
-  publish_date: string,
+  publishDate: string,
   contentSwedish: string,
   contentEnglish: string,
   eventLocation: string | null,
@@ -24,9 +25,6 @@ interface Item {
   facebookEvent: string,
   googleForm: string,
   publishStatus: string,
-  title: string,
-  description: string,
-  date: string,
 }
 
 function App() {
@@ -36,6 +34,7 @@ function App() {
 
   const fetchItems = async () => {
     const items = await invoke<Item[]>('fetch_items');
+    // TODO only set items if the new list is actually different
     setItems(items);
   }
 
@@ -84,7 +83,7 @@ function App() {
       </form>
       <p>{greetMsg}</p>
       {items.map(item => (
-        <h2>{item.titleEnglish}</h2>
+        <ItemComponent item={item} />
       ))}
     </main>
   );
