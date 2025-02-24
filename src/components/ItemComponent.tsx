@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from "react";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import {Dialog, DialogHeader, DialogTitle, DialogContent } from "@/components/ui/dialog";
 
 interface Item {
   id: number;
@@ -28,66 +30,88 @@ interface ItemProps {
 }
 
 const ItemComponent: React.FC<ItemProps> = ({ item }) => {
-  const isEvent = item.itemType === 'EVENT';
-  const isSticky = item.sticky;
-  const isSensitive = item.sensitive;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const isEvent = item.itemType === "EVENT";
 
-  return (
-    <div className={`item ${isSticky ? 'sticky' : ''} ${isSensitive ? 'sensitive' : ''}`}>
-      {/* Sticky and Sensitive Indicators */}
-      {isSticky && <div className="sticky-indicator">Pinned</div>}
-      {isSensitive && <div className="sensitive-indicator">Sensitive Content</div>}
+  const formatTime = (dateString: string | null) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  };
 
-      {/* Title */}
-      <h2>{item.titleEnglish}</h2>
+  const formatDate = (dateString: string | null) => {
+    if (!dateString) return "";
+    const date = new Date(dateString);
+    return date.toLocaleDateString();
+  }
 
-      {/* Author and Publish Info */}
-      <div className="meta">
-        <span>By {item.authorDisplay}</span>
-        {item.publishAsDisplay && <span> (as {item.publishAsDisplay})</span>}
-        <span> · {new Date(item.publishDate).toLocaleDateString()}</span>
+  const eventDetails = (
+    <div className="text-sm text-gray-600 mb-4">
+      <span>By {item.authorDisplay}</span>
+      {item.publishAs && <span> (as {item.publishAs})</span>}
+      <span> · {formatTime(item.publishDate)}</span>
+    {isEvent && (
+      <div className="text-gray-700">
+        <p>
+          📅 {formatDate(item.eventStartTime)}{" "}
+          🕒 {formatTime(item.eventStartTime)} - {formatTime(item.eventEndTime)}{" "}
+          📍 {item.eventLocation}
+        </p>
       </div>
-
-      {/* Event Details (if applicable) */}
-      {isEvent && (
-        <div className="event-details">
-          <p>
-            <strong>Location:</strong> {item.eventLocation}
-          </p>
-          <p>
-            <strong>Start:</strong> {new Date(item.eventStartTime!).toLocaleString()}
-          </p>
-          <p>
-            <strong>End:</strong> {new Date(item.eventEndTime!).toLocaleString()}
-          </p>
-          {item.facebookEvent && (
-            <p>
-              <strong>Facebook Event:</strong>{' '}
-              <a href={item.facebookEvent} target="_blank" rel="noopener noreferrer">
-                Link
-              </a>
-            </p>
-          )}
-          {item.googleForm && (
-            <p>
-              <strong>Google Form:</strong>{' '}
-              <a href={item.googleForm} target="_blank" rel="noopener noreferrer">
-                Link
-              </a>
-            </p>
-          )}
-        </div>
-      )}
-
-      {/* Content */}
-      <div className="content" dangerouslySetInnerHTML={{ __html: item.contentEnglish }} />
-
-      {/* Publish Status */}
-      <div className="publish-status">
-        <strong>Status:</strong> {item.publishStatus}
-      </div>
+    )}
     </div>
   );
-};
+
+  return (
+    <>
+      <Card
+        className="max-w-2xl mx-auto my-4 cursor-pointer hover:bg-gray-50"
+        onClick={() => setIsModalOpen(true)}
+      >
+        <CardHeader>
+          <CardTitle>{item.titleEnglish}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {eventDetails}
+        </CardContent>
+      </Card>
+
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>{item.titleEnglish}</DialogTitle>
+          </DialogHeader>
+          {eventDetails}      
+          <div
+            className="text-gray-700 preserve-line-breaks"
+            dangerouslySetInnerHTML={{ __html: item.contentEnglish }}
+          />
+          {item.facebookEvent && (
+            <a
+              href={item.facebookEvent}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              🎟️ Facebook Event
+            </a>
+          )}
+
+          {item.googleForm && (
+            <a
+              href={item.googleForm}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-600 hover:underline"
+            >
+              📝 Google Form
+            </a>
+          )}
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
 
 export default ItemComponent;

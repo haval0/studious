@@ -1,0 +1,10 @@
+styling
+typecast or wtv
+push notif
+language setting
+add extra tabs in navbar
+- Calendar
+- ChalmersCoin (KrappCoin)
+- Profile
+- Social
+	- Event invites/reactions? ChalmersCoin payments? Chat? Comments?
