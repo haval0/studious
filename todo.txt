@@ -1,8 +1,12 @@
+add html render
 styling
-typecast or wtv
+- different bg color for cards (light and dark mode)
 push notif
 language setting
+add images
+Signups and tickets
 add extra tabs in navbar
+- split event and news (add endpoints)
 - Calendar
 - ChalmersCoin (KrappCoin)
 - Profile
