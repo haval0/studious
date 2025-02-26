@@ -12,6 +12,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "se.datasektionen.studious",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -36,6 +37,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "9420e0d2-2f62-4ff9-8062-831a395213ad"
+      }
     }
   }
 }
