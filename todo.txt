@@ -12,3 +12,7 @@ add extra tabs in navbar
 - Profile
 - Social
 	- Event invites/reactions? ChalmersCoin payments? Chat? Comments?
+Calypso
+- event and post endp
+- dont return html
+- images (add to cards)
