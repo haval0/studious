@@ -62,6 +62,9 @@ importers:
       expo-web-browser:
         specifier: ~14.0.2
         version: 14.0.2(expo@52.0.37(@babel/core@7.26.9)(@babel/preset-env@7.26.9(@babel/core@7.26.9))(@expo/metro-runtime@4.0.1(react-native@0.76.7(@babel/core@7.26.9)(@babel/preset-env@7.26.9(@babel/core@7.26.9))(@types/react@18.3.18)(react@18.3.1)))(graphql@16.8.1)(react-native-webview@13.12.5(react-native@0.76.7(@babel/core@7.26.9)(@babel/preset-env@7.26.9(@babel/core@7.26.9))(@types/react@18.3.18)(react@18.3.1))(react@18.3.1))(react-native@0.76.7(@babel/core@7.26.9)(@babel/preset-env@7.26.9(@babel/core@7.26.9))(@types/react@18.3.18)(react@18.3.1))(react@18.3.1))(react-native@0.76.7(@babel/core@7.26.9)(@babel/preset-env@7.26.9(@babel/core@7.26.9))(@types/react@18.3.18)(react@18.3.1))
+      htmlparser2:
+        specifier: ^10.0.0
+        version: 10.0.0
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -2225,13 +2228,26 @@ packages:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
     engines: {node: '>=8'}
 
+  dom-serializer@2.0.0:
+    resolution: {integrity: sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==}
+
+  domelementtype@2.3.0:
+    resolution: {integrity: sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==}
+
   domexception@4.0.0:
     resolution: {integrity: sha512-A2is4PLG+eeSfoTMA95/s4pvAoSo2mKtiM5jlHkAVewmiO8ISFTFKZjH7UAM1Atli/OT/7JHOrJRJiMKUZKYBw==}
     engines: {node: '>=12'}
     deprecated: Use your platform's native DOMException instead
 
+  domhandler@5.0.3:
+    resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==}
+    engines: {node: '>= 4'}
+
   domino@2.1.6:
     resolution: {integrity: sha512-3VdM/SXBZX2omc9JF9nOPCtDaYQ67BGp5CoLpIQlO2KCAPETs8TcDHacF26jXadGbvUteZzRTeos2fhID5+ucQ==}
+
+  domutils@3.2.2:
+    resolution: {integrity: sha512-6kZKyUajlDuqlHKVX1w7gyslj9MPIXzIFiz/rGu35uC1wMi+kMhQwGhl4lt9unC9Vb9INnY9Z3/ZA3+FhASLaw==}
 
   dotenv-expand@11.0.7:
     resolution: {integrity: sha512-zIHwmZPRshsCdpMDyVsqGmgyP0yT8GAgXUnkdAoJisxvf33k7yO6OuoKmcTGuXPWSsm8Oh88nZicRLA9Y0rUeA==}
@@ -2302,6 +2318,10 @@ packages:
 
   entities@4.5.0:
     resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
+    engines: {node: '>=0.12'}
+
+  entities@6.0.0:
+    resolution: {integrity: sha512-aKstq2TDOndCn4diEyp9Uq/Flu2i1GlLkc6XIDQSDMuaFE3OPW5OphLCyQ5SpSJZTb4reN+kTcYru5yIfXoRPw==}
     engines: {node: '>=0.12'}
 
   env-editor@0.4.2:
@@ -2863,6 +2883,9 @@ packages:
 
   html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
+
+  htmlparser2@10.0.0:
+    resolution: {integrity: sha512-TwAZM+zE5Tq3lrEHvOlvwgj1XLWQCtaaibSN11Q+gGBAS7Y1uZSWwXXRe4iF6OXnaq1riyQAPFOBtYc77Mxq0g==}
 
   http-call@5.3.0:
     resolution: {integrity: sha512-ahwimsC23ICE4kPl9xTBjKB4inbRaeLyZeRunC/1Jy/Z6X8tv22MEAjK+KBOMSVLaqXPTTmd8638waVIKLGx2w==}
@@ -8106,11 +8129,29 @@ snapshots:
     dependencies:
       path-type: 4.0.0
 
+  dom-serializer@2.0.0:
+    dependencies:
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+      entities: 4.5.0
+
+  domelementtype@2.3.0: {}
+
   domexception@4.0.0:
     dependencies:
       webidl-conversions: 7.0.0
 
+  domhandler@5.0.3:
+    dependencies:
+      domelementtype: 2.3.0
+
   domino@2.1.6: {}
+
+  domutils@3.2.2:
+    dependencies:
+      dom-serializer: 2.0.0
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
 
   dotenv-expand@11.0.7:
     dependencies:
@@ -8256,6 +8297,8 @@ snapshots:
       tapable: 2.2.1
 
   entities@4.5.0: {}
+
+  entities@6.0.0: {}
 
   env-editor@0.4.2: {}
 
@@ -8893,6 +8936,13 @@ snapshots:
       whatwg-encoding: 2.0.0
 
   html-escaper@2.0.2: {}
+
+  htmlparser2@10.0.0:
+    dependencies:
+      domelementtype: 2.3.0
+      domhandler: 5.0.3
+      domutils: 3.2.2
+      entities: 6.0.0
 
   http-call@5.3.0:
     dependencies:

@@ -8,6 +8,8 @@ import {
 import { Item } from '@/types/Item';
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
+import HtmlRenderer from '@/components/HtmlRenderer';
+import { useThemeColor } from '@/hooks/useThemeColor';
 
 interface ItemProps {
   item: Item;
@@ -16,6 +18,8 @@ interface ItemProps {
 const ItemCard: React.FC<ItemProps> = ({ item }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const isEvent = item.itemType === 'EVENT';
+
+  const backgroundColor = useThemeColor({}, 'card');
 
   const formatTime = (dateString: string | null) => {
     if (!dateString) return '';
@@ -30,7 +34,7 @@ const ItemCard: React.FC<ItemProps> = ({ item }) => {
   };
 
   const eventDetails = (
-    <ThemedView style={styles.detailsContainer}>
+    <ThemedView style={[styles.detailsContainer, { backgroundColor }]}>
       <ThemedText style={styles.detailText}>
         By {item.authorDisplay}
         {item.publishAs && ` (as ${item.publishAs})`}
@@ -50,7 +54,7 @@ const ItemCard: React.FC<ItemProps> = ({ item }) => {
   return (
     <>
       <TouchableOpacity
-        style={styles.card}
+        style={[styles.card, { backgroundColor }]}
         onPress={() => setModalVisible(true)}
       >
         <ThemedText style={styles.title}>{item.titleEnglish}</ThemedText>
@@ -61,7 +65,7 @@ const ItemCard: React.FC<ItemProps> = ({ item }) => {
         <ThemedView style={styles.modalContainer}>
           <ThemedText style={styles.modalTitle}>{item.titleEnglish}</ThemedText>
           {eventDetails}
-          <ThemedText style={styles.content}>{item.contentEnglish}</ThemedText>
+          <HtmlRenderer html={item.contentEnglish}/>
           
           {item.facebookEvent && (
             <TouchableOpacity
@@ -95,7 +99,6 @@ const styles = StyleSheet.create({
   card: {
     padding: 15,
     marginVertical: 8,
-    //backgroundColor: '#fff',
     borderRadius: 8,
     elevation: 2,
   },
@@ -109,17 +112,14 @@ const styles = StyleSheet.create({
   },
   detailText: {
     fontSize: 14,
-    //color: '#666',
   },
   eventText: {
     fontSize: 14,
-    //color: '#777',
     marginTop: 4,
   },
   modalContainer: {
     flex: 1,
     padding: 20,
-    //backgroundColor: '#fff',
   },
   modalTitle: {
     fontSize: 24,
@@ -132,13 +132,11 @@ const styles = StyleSheet.create({
   },
   link: {
     fontSize: 16,
-    //color: '#0066cc',
     marginVertical: 8,
   },
   closeButton: {
     padding: 10,
     alignItems: 'center',
-    //backgroundColor: '#eee',
     borderRadius: 8,
     marginTop: 16,
   },
