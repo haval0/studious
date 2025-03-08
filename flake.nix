@@ -20,10 +20,14 @@
 
     android-sdk = android-nixpkgs.sdk.x86_64-linux (sdkPkgs: with sdkPkgs; [
       cmdline-tools-latest
+      build-tools-34-0-0
       build-tools-35-0-0
       platform-tools
+      platforms-android-34
       platforms-android-35
       emulator
+      ndk-26-1-10909125
+      cmake-3-22-1
     ]); 
   in {
     devShells.x86_64-linux.default = pkgs.mkShell rec { 
@@ -32,11 +36,12 @@
 	nodejs
         typescript-language-server
         watchman
-        jdk
+        jdk17
 	libvirt
         android-studio
         android-sdk
       ];
+      GRADLE_OPTS="-Dorg.gradle.project.android.aapt2FromMavenOverride=${android-sdk}/share/android-sdk/build-tools/34.0.0/aapt2";
     };
   };
 }
