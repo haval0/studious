@@ -40,6 +40,7 @@
 	libvirt
         android-studio
         android-sdk
+	microsoft-edge
       ];
       GRADLE_OPTS="-Dorg.gradle.project.android.aapt2FromMavenOverride=${android-sdk}/share/android-sdk/build-tools/34.0.0/aapt2";
     };
