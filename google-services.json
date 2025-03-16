@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "878000470875",
+    "project_id": "studious-64074",
+    "storage_bucket": "studious-64074.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878000470875:android:0622ef34c71cb71347387e",
+        "android_client_info": {
+          "package_name": "se.datasektionen.studious"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFY0eYu0bujc0IxCKEowrjkLIFtZT36Zs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

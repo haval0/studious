@@ -9,9 +9,11 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "se.datasektionen.studious"
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "package": "se.datasektionen.studious",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
